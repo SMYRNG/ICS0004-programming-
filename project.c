@@ -1,19 +1,23 @@
 #include <stdio.h>
-int main() {
+
+int main(void) {
     while (1) {
-        //Gives a possibiliy to close the programm.
-        char is_procces_done = "-";
+        char is_procces_done = '-';
+
         printf("Do you want to make a transaction? (y/n) ");
-        scanf_s("%c", &is_procces_done);
-        //Checks if input is valid
+        if (scanf_s(" %c", &is_procces_done, 1) != 1) {
+            return 1;
+        }
+
         switch (is_procces_done) {
         case 'n':
-            break;
+            return 0;
         case 'y':
-            printf("main");
-            continue;
+            printf("main\n");
+            break;
+        default:
+            printf("Error! %c is not a valid input.\n", is_procces_done);
+            break;
         }
-        printf("Error! %c is not a valid input. \n", is_procces_done);
     }
-    return 0;
 }
