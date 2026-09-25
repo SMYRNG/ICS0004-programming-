@@ -61,7 +61,8 @@ int main(void)
         case 'p':
             printf("photographer pov\n");
             break;
-
+        
+        case 'Q':
         case 'q':
             return 0;
 
