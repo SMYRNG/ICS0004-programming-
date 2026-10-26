@@ -41,7 +41,7 @@ int user_order_creation(struct order orders[], int order_amount,
         (orders[order_amount].urgent_choice == 'y' ||
             orders[order_amount].urgent_choice == 'Y');
 
-    printf("Type of order (1-3): ");
+    printf("Type of order (1 - Photo printing, 2 - Film development, 3 - Both): ");
     if (scanf_s("%d", &orders[order_amount].type_of_order) != 1 ||
         orders[order_amount].type_of_order < 1 ||
         orders[order_amount].type_of_order > 3) {
