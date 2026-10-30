@@ -26,20 +26,56 @@ int user_order_creation(struct order orders[], int order_amount,
         return 0;
     }
 
+    int ch = getchar();
+    if (ch != '\n' && ch != EOF) {
+        while (ch != '\n' && ch != EOF) {
+            ch = getchar();
+        }
+        printf("Name too long or invalid. Maximum 49 characters.\n");
+        return 0;
+    }
+
     printf("Surname: ");
     if (scanf_s("%49s", orders[order_amount].surname,
         (unsigned)sizeof orders[order_amount].surname) != 1) {
         return 0;
     }
 
+    ch = getchar();
+    if (ch != '\n' && ch != EOF) {
+        while (ch != '\n' && ch != EOF) {
+            ch = getchar();
+        }
+        printf("Surname too long or invalid. Maximum 49 characters.\n");
+        return 0;
+    }
+
     printf("Is the order urgent? (y/n): ");
+
     if (scanf_s(" %c", &orders[order_amount].urgent_choice, 1) != 1) {
         return 0;
     }
 
+    char urgent = orders[order_amount].urgent_choice;
+
+    int extra_input = 0;
+
+    while ((ch = getchar()) != '\n' && ch != EOF) {
+        if (ch != ' ' && ch != '\t' && ch != '\r') {
+            extra_input = 1;
+        }
+    }
+
+    if (extra_input ||
+        (urgent != 'y' && urgent != 'Y' &&
+            urgent != 'n' && urgent != 'N')) {
+
+        printf("Invalid urgency. Please enter y or n.\n");
+        return 0;
+    }
+
     orders[order_amount].is_urgent =
-        (orders[order_amount].urgent_choice == 'y' ||
-            orders[order_amount].urgent_choice == 'Y');
+        (urgent == 'y' || urgent == 'Y');
 
     printf("Type of order (1 - Photo printing, 2 - Film development, 3 - Both): ");
     if (scanf_s("%d", &orders[order_amount].type_of_order) != 1 ||
@@ -202,4 +238,3 @@ int main(void)
         }
     }
 }
-
